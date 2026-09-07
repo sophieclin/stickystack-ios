@@ -1,0 +1,47 @@
+name: StickyStack
+options:
+  bundleIdPrefix: com.stickystack
+  deploymentTarget:
+    iOS: "17.0"
+configFiles:
+  Debug: Config/Secrets.xcconfig
+  Release: Config/Secrets.xcconfig
+packages:
+  Supabase:
+    url: https://github.com/supabase/supabase-swift.git
+    from: 2.0.0
+targets:
+  StickyStack:
+    type: application
+    platform: iOS
+    sources:
+      - StickyStack
+    info:
+      path: Generated-Info.plist
+      properties:
+        UILaunchScreen: {}
+        SUPABASE_URL: $(SUPABASE_URL)
+        SUPABASE_ANON_KEY: $(SUPABASE_ANON_KEY)
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.stickystack.app
+        SWIFT_VERSION: "6.0"
+    dependencies:
+      - package: Supabase
+        product: Supabase
+  StickyStackTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - StickyStackTests
+    dependencies:
+      - target: StickyStack
+schemes:
+  StickyStack:
+    build:
+      targets:
+        StickyStack: all
+        StickyStackTests: [test]
+    test:
+      targets:
+        - StickyStackTests
