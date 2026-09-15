@@ -11,8 +11,17 @@ struct RootView: View {
             case .signedOut:
                 LoginView()
             case .signedIn:
-                // Replaced with TodoListView in Task 12.
-                Text("Signed in")
+                if let userId = authViewModel.currentUserId {
+                    TodoListView(
+                        viewModel: TodoListViewModel(
+                            userId: userId,
+                            weeksService: SupabaseWeeksService(client: SupabaseManager.shared),
+                            notesService: SupabaseNotesService(client: SupabaseManager.shared)
+                        )
+                    )
+                } else {
+                    ProgressView()
+                }
             }
         }
         .task { authViewModel.start() }
