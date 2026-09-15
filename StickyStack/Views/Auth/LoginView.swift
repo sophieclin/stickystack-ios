@@ -10,7 +10,7 @@ struct LoginView: View {
     var body: some View {
         VStack(spacing: 16) {
             Text("STICKYSTACK")
-                .font(.system(.largeTitle, design: .rounded, weight: .black))
+                .font(.system(.largeTitle, weight: .black))
 
             TextField("Email", text: $email)
                 .textContentType(.emailAddress)

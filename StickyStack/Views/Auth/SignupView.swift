@@ -11,7 +11,7 @@ struct SignupView: View {
     var body: some View {
         VStack(spacing: 16) {
             Text("CREATE ACCOUNT")
-                .font(.system(.title, design: .rounded, weight: .black))
+                .font(.system(.title, weight: .black))
 
             TextField("Username", text: $username)
                 .textInputAutocapitalization(.never)
